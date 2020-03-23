@@ -2,3 +2,4 @@ venv
 migrations
 src/migrations/*
 .config_secret/
+__pycache__
