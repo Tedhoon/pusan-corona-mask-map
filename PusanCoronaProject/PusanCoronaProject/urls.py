@@ -13,9 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
 from django.contrib import admin
 from django.urls import path
+from src import views as main_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', main_views.main, name="main"),
+    path('patient_admin', main_views.patient_admin, name="patient_admin"), # 서버명/patient_admin 주소에서 확진자 동선 추가/삭제 가능.
+    path('path_add', main_views.path_add, name="path_add"),
+    path('path_delete', main_views.path_delete, name="path_delete"),
 ]
