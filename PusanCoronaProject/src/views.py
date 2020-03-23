@@ -78,11 +78,12 @@ def path_delete(requests):
 ########### 이 밑에 있는 함수들을 모두 짠 후 배포 직전에 모두 한 번씩 실행하여 데이터베이스를 초기화 해주셔야 합니다. #################
 def get_mask_stores():
     url = "https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByAddr/json"
+    # 이 url은 공적마스크 위치, 재고 등을 json형태로 주네
     headers = {
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
     }
 
-    ####################### 자기 지역의 시, 군, 구를 모두 입력 ###############################
+    # 여기서 gu_list에 있는 것만 지정해서 json get
     gu_list = [
         "부산광역시 강서구",
         "부산광역시 금정구",
@@ -101,7 +102,6 @@ def get_mask_stores():
         "부산광역시 해운대구",
         "부산광역시 기장군",
     ]
-    ###################################################################################
 
     mask_stores = {
         'stores': [],
