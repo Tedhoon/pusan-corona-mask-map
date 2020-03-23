@@ -173,12 +173,15 @@ def get_status():
 
     soup = BeautifulSoup(r, "html.parser")
     # table = soup.find(id="patients2")
+        
+    infected_parse = soup.findAll('span')[1].text.replace('명','')
+    cured_parse = soup.findAll('span')[3].text.replace('명','')
 
     # 목록이 추가되면 수정하기
     names = ["infected", "cured"]
 
     ################### values = [‘확진자 수’, ‘완치자 수’] 가 되도록 크롤링해 주세요. ######################
-    values = ['311','11']
+    values = [infected_parse,cured_parse]
     #####################################################################################################
 
     statistics = {}
