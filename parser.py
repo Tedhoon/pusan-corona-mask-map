@@ -87,17 +87,19 @@ def pusan_temp_patient_parser():
         temp_path=list()
         for i in path_info:
             if i.text !="" and i.text[0] != "※":
-                temp_path.append(i.text)
-
                 
-        print("[Age] : "+ personal_info[0][-6::])
-        print("[Confirmed Date] : "+ patient_info[4].text)
-        print("[Current Status] : "+ patient_info[3].text)
-        print("[Gender] : "+ personal_info[1].replace(' ',''))
-        print("[ID] : "+ personal_info[0][:-8])
-        print("[Paths] : ")
+                cleanr =re.compile('<.*?>')
+                cleantext = re.sub(cleanr, '', i)
+                temp_path.append(cleantext)
+        # print(temp_pa)
+        # print("[Age] : "+ personal_info[0][-6::])
+        # print("[Confirmed Date] : "+ patient_info[4].text)
+        # print("[Current Status] : "+ patient_info[3].text)
+        # print("[Gender] : "+ personal_info[1].replace(' ',''))
+        # print("[ID] : "+ personal_info[0][:-8])
+        # print("[Paths] : ")
         print(temp_path)
-        print("[Region] : "+ personal_info[2].replace(' ','').replace(')',''))
+        # print("[Region] : "+ personal_info[2].replace(' ','').replace(')',''))
      
         print("--------------")
     print("성공")
@@ -131,3 +133,18 @@ def pusan_temp_patient_parser():
     pp = pprint.PrettyPrinter(indent=1)
     pp.pprint(patients)
 pusan_temp_patient_parser()
+
+# 예시입니당
+# 39: {'Age': '만21세',
+#       'Confirmed Date': '3/26',
+#       'Current Status': '울산대학교병원',
+#       'Gender': '여',
+#       'ID': '울산#39',오후 4:24 2020-03-27
+#       'Paths': ['3.21.(토) (16:20)인천국제공항 입국→(22:00)김해공항(대한항공KE1407)→자택(사촌차 이용)',
+#                 '3.22.(일) 자택',
+#                 '3.23.(월) (12:00)KT M&S 호계직영점(북구 호계로 280)→자택(자차 이용)',
+#                 '3.24.(화) (12:21)한국시티은행울산지점(남구 번영로 131 현대해상빌딩)→자택(자차 이용)',
+#                 '3.25.(수) (10:05)남구보건소 선별진료소→(10:49)세븐일레븐 울산파크폴리스점(남구 대공원로 241 '
+#                 '대공원코오롱파크폴리스)→자택(택시 이용)',
+#                 '3.26.(목) (09:00)남구보건소 선별진료소(재검사, 자차 이용)'],
+#       'Region': '남구'}}
