@@ -64,7 +64,7 @@ def temp_patient_parser():
 
 # temp_patient_parser()
 
-import re,unicodedata
+import re
 
 def pusan_temp_patient_parser():
     url = "http://www.busan.go.kr/corona19/index"
@@ -77,7 +77,7 @@ def pusan_temp_patient_parser():
     soup = BeautifulSoup(r, "html.parser")
 
     table = soup.find_all('ul',tabindex="0")
-
+    patient_num = 1
     for columns in table:
         patient_info = columns.select("li>span")
         # path_info = columns.select("li", class_="result")
@@ -89,23 +89,30 @@ def pusan_temp_patient_parser():
             if i.text !="" and i.text[0] != "※":
                 temp_text = re.sub(r'\xa0', ' ', i.text)
                 temp_path.append(temp_text)
-    
-        print("[Age] : "+ personal_info[0][-6::])
-        print("[Confirmed Date] : "+ patient_info[4].text)
-        print("[Current Status] : "+ patient_info[3].text)
-        print("[Gender] : "+ personal_info[1].replace(' ',''))
-        print("[ID] : "+ personal_info[0][:-8])
-        print("[Paths] : ")
+
+
+
+        patient = {}
+
+        patient[patient_num] = {}
+        patient[patient_num]['Age'] = personal_info[0][-6::]
+        patient[patient_num]['Confirmed Date'] = patient_info[4].text
+        patient[patient_num]['Current Status'] = patient_info[3].text
+        patient[patient_num]['Gender'] = personal_info[1].replace(' ','')
+        patient[patient_num]['ID'] = personal_info[0][:-8]
+        patient[patient_num]['Paths'] = temp_path       
+        patient[patient_num]['Region'] = personal_info[2].replace(' ','').replace(')','')
+        
+        patient_num += 1
         pp = pprint.PrettyPrinter(indent=1)
-        pp.pprint(temp_path)
-        print("[Region] : "+ personal_info[2].replace(' ','').replace(')',''))
+        pp.pprint(patient)
 
     print("성공")
 
   
 pusan_temp_patient_parser()
 
-# 예시입니당
+# 예시
 # 39: {'Age': '만21세',
 #       'Confirmed Date': '3/26',
 #       'Current Status': '울산대학교병원',
