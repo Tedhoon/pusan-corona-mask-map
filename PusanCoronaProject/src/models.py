@@ -3,7 +3,7 @@ from django.db import models
 class Patient(models.Model):
     code = models.IntegerField()
     gender = models.CharField(max_length=5)
-    age = models.CharField(max_length=5)
+    age = models.CharField(max_length=10)
     region = models.CharField(max_length=30)
     confirmed_date = models.DateField(null=True)
     current_status = models.CharField(max_length=100)
