@@ -5,11 +5,11 @@ from .models import Mask, Statistics, PatientPath, Patient
 from dateutil.parser import parse as date_parse
 from datetime import datetime
 from bs4 import BeautifulSoup
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
 import time
 import json
 import requests
-# from main import patient_crawl
+import re
 
 # Create your views here.
 def main(requests):
@@ -161,10 +161,8 @@ def get_mask_stores():
     # return mask_stores
 
 def get_status():
-    ####################### 자기 지역의 동선 정보를 업데이트해주는 공식 홈페이지로 변경 ###############################
     url = "http://www.busan.go.kr/corona19/index#travelhist"
-    ####################################################################################################
-
+    
     headers = {
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
     }
@@ -180,10 +178,8 @@ def get_status():
     # 목록이 추가되면 수정하기
     names = ["infected", "cured"]
 
-    ################### values = [‘확진자 수’, ‘완치자 수’] 가 되도록 크롤링해 주세요. ######################
     values = [infected_parse,cured_parse]
-    #####################################################################################################
-
+    
     statistics = {}
     for i, name in enumerate(names):
         value = int(values[i])
@@ -205,73 +201,46 @@ def get_status():
     log = "{}: Current infected patients {}, Current cured patients: {}".format(updated_at, statistics['infected'],  statistics['cured'])
     print(log)
 
+
+
+
 def get_patients():
-    ############################# 각자의 지역에 따라 크롤링을 하셔야 합니다 ##################################
-    # url = "http://www.ulsan.go.kr/corona.jsp"
-    # headers = {
-    #     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
-    # }
-    # req = requests.get(url, headers=headers)
-    # r = req.text
-
-    # soup = BeautifulSoup(r, "html.parser")
-
-    # table = soup.find(id="patients")
-    # # columns = [column.text for column in table.select("thead th")]
-
-    # patients_rows = list(table.select("tbody tr"))[::-1]
-
-    # total_patients = int(len(patients_rows) / 2)
-    # # print(total_patients)
-    # patients = {}
-
-    # patient_num = 1
-    # for num, row in enumerate(patients_rows):
-    #     # print(patient_num)
-    #     if num % 2 == 0:
-    #         patients[patient_num] = {}
-    #         patients[patient_num]["Paths"] = [path.text for path in row.select('.corona-move li')]
-    #     else:
-    #         informations = [info.text for info in row.select('td')]
-    #         # print(informations)
-    #         patients[patient_num]["ID"] = informations[0]
-
-    #         patient_details = informations[1].split("/")
-    #         patients[patient_num]["Gender"] = patient_details[0]
-    #         patients[patient_num]["Age"] = patient_details[1]
-    #         patients[patient_num]["Region"] = patient_details[2]
-
-    #         patients[patient_num]["Confirmed Date"] = informations[3]
-    #         patients[patient_num]["Current Status"] = informations[4]
-
-    #         patient_num += 1
-
-    ############################# 여기까지 아래의 형식대로 patients가 저장되어야 합니다. ##################################
-    '''
-    patients = {
-        1: {
-            “ID”: 환자 식별자,
-            “Gender”: 환자 성별,
-            “Age”: 환자 나이,
-            “Region”: 환자 지역,
-            “Confirmed Date”:  확진 날짜,
-            “Current Status”: 현재 상태(격리 장소, 퇴원 여부 등 기타 정보),
-            “Paths”: raw 환자 동선 정보,
-        },
-        2: {
-            “ID”: 환자 식별자,
-            “Gender”: 환자 성별,
-            “Age”: 환자 나이,
-            “Region”: 환자 지역,
-            “Confirmed Date”:  확진 날짜,
-            “Current Status”: 현재 상태(격리 장소, 퇴원 여부 등 기타 정보),
-            “Paths”: raw 환자 동선 정보,
-        },
-        …
+    url = "http://www.busan.go.kr/corona19/index"
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
     }
-    '''
-    ################################# 맞췄다면 여기부턴 변경하지 말 것. ########################################
+    req = requests.get(url, headers=headers)
+    r = req.text
 
+    soup = BeautifulSoup(r, "html.parser")
+    
+    table = soup.find_all('ul',tabindex="0")
+
+    patients = {}
+    patient_num = 1
+    for columns in table:
+        patient_info = columns.select("li>span")
+        path_info = columns.select("li>p")
+        personal_info = patient_info[0].text.split('/')
+        
+        temp_path=list()
+        for i in path_info:
+            if i.text !="" and i.text[0] != "※":
+                temp_text = re.sub(r'\xa0', ' ', i.text)
+                temp_path.append(temp_text)
+
+
+        patients[patient_num] = {}
+        patients[patient_num]['Age'] = personal_info[0][-6::]
+        patients[patient_num]['Confirmed Date'] = patient_info[4].text
+        patients[patient_num]['Current Status'] = patient_info[3].text
+        patients[patient_num]['Gender'] = personal_info[1].replace(' ','')
+        patients[patient_num]['ID'] = personal_info[0][:-8]
+        patients[patient_num]['Paths'] = temp_path       
+        patients[patient_num]['Region'] = personal_info[2].replace(' ','').replace(')','')
+        
+        patient_num += 1
+  
     updated_patient = []
     for number, patient_info in patients.items():
         updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -291,6 +260,6 @@ def get_patients():
         patient.save()
     
     # print(updated_patient)
-    if updated_patient: send_mail("환자 업데이트: "+", ".join(updated_patient), ", ".join(updated_patient) + "번 환자의 동선이 업데이트 되었습니다.", 'coronaulsan@gmail.com', ['coronaulsan@gmail.com'], fail_silently=False)
-    log = "{}: Total patients: {}".format(updated_at, total_patients)
-    print(log)
+    # # if updated_patient: send_mail("환자 업데이트: "+", ".join(updated_patient), ", ".join(updated_patient) + "번 환자의 동선이 업데이트 되었습니다.", 'coronaulsan@gmail.com', ['coronaulsan@gmail.com'], fail_silently=False)
+    # log = "{}: Total patients: {}".format(updated_at, total_patients)
+    # print(log)
