@@ -1,0 +1,127 @@
+[33mcommit c4bddd2e3cc806d38660cd9983678306d1722a7d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Reflog: HEAD@{0} (Tedhoon <gt0305@likelion.org>)
+Reflog message: reset: moving to HEAD^
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Tue Mar 31 18:58:27 2020 +0900
+
+    [mdf] 환자 모델의 age max_length변경
+
+[33mcommit 77f0fc48254c6564244fd6d43816ea5dfcc875e2[m[33m ([m[1;31morigin/master[m[33m)[m
+Reflog: HEAD@{1} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [add] Readme
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Tue Mar 31 19:33:28 2020 +0900
+
+    [add] Readme
+
+[33mcommit c4bddd2e3cc806d38660cd9983678306d1722a7d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Reflog: HEAD@{2} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [mdf] 환자 모델의 age max_length변경
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Tue Mar 31 18:58:27 2020 +0900
+
+    [mdf] 환자 모델의 age max_length변경
+
+[33mcommit 1351f746e1981b46c9534861d9af52546b151fe1[m
+Reflog: HEAD@{3} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [add] 확진자 동선 정보 실시간 업데이트 함수 작성
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Tue Mar 31 18:43:59 2020 +0900
+
+    [add] 확진자 동선 정보 실시간 업데이트 함수 작성
+
+[33mcommit 9734cc5d9afee045312c00309458d9c5764a3e16[m
+Reflog: HEAD@{4} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [add] 파싱데이터 딕셔너리 형태로 정제
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Mon Mar 30 22:07:59 2020 +0900
+
+    [add] 파싱데이터 딕셔너리 형태로 정제
+
+[33mcommit 131a0ac59e2821df429128312598c44a7b631de6[m
+Reflog: HEAD@{5} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [mdf] \ xa0 유니 코드(공백) 변환 처리
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Mon Mar 30 21:30:10 2020 +0900
+
+    [mdf] \ xa0 유니 코드(공백) 변환 처리
+
+[33mcommit 385b8d2f1854512f7c92ca9652a302ec49f1a75a[m
+Reflog: HEAD@{6} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [add] parser encode type설정 중
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Sun Mar 29 19:27:24 2020 +0900
+
+    [add] parser encode type설정 중
+
+[33mcommit d91ee1c29658a65b30581e1c80fe4c13a0b58304[m
+Reflog: HEAD@{7} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [add] 확진자 정보 및 동선 크롤러
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Fri Mar 27 17:56:22 2020 +0900
+
+    [add] 확진자 정보 및 동선 크롤러
+
+[33mcommit ad69df306dcd61d0fb9e13ee7514984901a05550[m
+Reflog: HEAD@{8} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [add] parsing data 추가, template 문구 수정
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Tue Mar 24 04:33:28 2020 +0900
+
+    [add] parsing data 추가, template 문구 수정
+
+[33mcommit 1724eee6481e6616a85bc89315419661db3ce3ae[m
+Reflog: HEAD@{9} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [add] 부산광역시의 확진자 수, 완치자 수 크롤러
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Tue Mar 24 04:01:25 2020 +0900
+
+    [add] 부산광역시의 확진자 수, 완치자 수 크롤러
+
+[33mcommit bf3973bb4da30d3deacff3895c58b2fb0c2eca16[m
+Reflog: HEAD@{10} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [add] 부산지역 공적 마스크 판매처 및 재고 api연동
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Tue Mar 24 03:44:50 2020 +0900
+
+    [add] 부산지역 공적 마스크 판매처 및 재고 api연동
+
+[33mcommit a9a0baa255550d45a976d5be882e1e96b8f1ed85[m
+Reflog: HEAD@{11} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [add] main app add & api key test & create superuser
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Tue Mar 24 03:07:59 2020 +0900
+
+    [add] main app add & api key test & create superuser
+
+[33mcommit 7cbb616773ad276111086d7963dc939cfe550018[m
+Reflog: HEAD@{12} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [add] 모델 생성 및 postgresql 연동 테스트
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Tue Mar 24 00:44:38 2020 +0900
+
+    [add] 모델 생성 및 postgresql 연동 테스트
+
+[33mcommit 9e61bd020a7f7572b74255f6f7ea18ec5d83e357[m
+Reflog: HEAD@{13} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [mdf] pycache ignore
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Tue Mar 24 00:13:09 2020 +0900
+
+    [mdf] pycache ignore
+
+[33mcommit 0bc36b7936fa988f9e1c877e7d3db77e7d76d037[m
+Reflog: HEAD@{14} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit: [add] 시크릿 키 재생성, 보안 및 배포용 settings custom, postgresql 연동
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Mon Mar 23 20:56:42 2020 +0900
+
+    [add] 시크릿 키 재생성, 보안 및 배포용 settings custom, postgresql 연동
+
+[33mcommit 2f7aae984d5e62a7324f8ad65bbb318dbed8d8ec[m
+Reflog: HEAD@{15} (Tedhoon <gt0305@likelion.org>)
+Reflog message: commit (initial): [add] 프로젝트 및 앱 생성
+Author: Tedhoon <gt0305@likelion.org>
+Date:   Mon Mar 23 20:27:49 2020 +0900
+
+    [add] 프로젝트 및 앱 생성

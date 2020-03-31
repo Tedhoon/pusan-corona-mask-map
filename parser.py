@@ -75,8 +75,10 @@ def pusan_temp_patient_parser():
     r = req.text
 
     soup = BeautifulSoup(r, "html.parser")
-
+    
     table = soup.find_all('ul',tabindex="0")
+
+    patients = {}
     patient_num = 1
     for columns in table:
         patient_info = columns.select("li>span")
@@ -92,20 +94,20 @@ def pusan_temp_patient_parser():
 
 
 
-        patient = {}
+        
 
-        patient[patient_num] = {}
-        patient[patient_num]['Age'] = personal_info[0][-6::]
-        patient[patient_num]['Confirmed Date'] = patient_info[4].text
-        patient[patient_num]['Current Status'] = patient_info[3].text
-        patient[patient_num]['Gender'] = personal_info[1].replace(' ','')
-        patient[patient_num]['ID'] = personal_info[0][:-8]
-        patient[patient_num]['Paths'] = temp_path       
-        patient[patient_num]['Region'] = personal_info[2].replace(' ','').replace(')','')
+        patients[patient_num] = {}
+        patients[patient_num]['Age'] = personal_info[0][-6::]
+        patients[patient_num]['Confirmed Date'] = patient_info[4].text
+        patients[patient_num]['Current Status'] = patient_info[3].text
+        patients[patient_num]['Gender'] = personal_info[1].replace(' ','')
+        patients[patient_num]['ID'] = personal_info[0][:-8]
+        patients[patient_num]['Paths'] = temp_path       
+        patients[patient_num]['Region'] = personal_info[2].replace(' ','').replace(')','')
         
         patient_num += 1
-        pp = pprint.PrettyPrinter(indent=1)
-        pp.pprint(patient)
+    pp = pprint.PrettyPrinter(indent=1)
+    pp.pprint(patients)
 
     print("성공")
 
