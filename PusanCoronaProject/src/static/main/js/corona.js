@@ -11,7 +11,7 @@ var day = new Date()
 var mon = day.getMonth()+1
 var dt = day.getDate()
 
-// 울산 좌표를 중심으로 map 생성 (각 지역의 중심 좌표를 입력하세요)
+// 좌표를 중심으로 map 생성 (각 지역의 중심 좌표를 입력하세요)
 var defaultx = 35.1797913
 var defaulty = 129.074987
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -191,7 +191,7 @@ function searchPlaces() {
     }
     removeMarker(); // 지도에 표시되고 있는 마커를 제거합니다
     if (currCategory == "hospital"){
-        ps.keywordSearch('울산 코로나 진료소',placesSearchCB); 
+        ps.keywordSearch('부산 코로나 진료소',placesSearchCB); 
     } else if (currCategory == "mask"){
         displayMask(masks)
     }
